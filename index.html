@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket POS</title>
+
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: #eaeaea;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .pos {
+      width: 340px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .header {
+      background: #0d6efd;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .info {
+      padding: 10px 15px;
+      font-size: 13px;
+    }
+
+    .line {
+      border-top: 1px dashed #999;
+      margin: 10px 0;
+    }
+
+    .items {
+      padding: 0 15px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .total {
+      padding: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      padding: 10px;
+      color: #555;
+    }
+
+    .btn {
+      display: block;
+      width: 90%;
+      margin: 10px auto;
+      padding: 10px;
+      background: #0d6efd;
+      color: white;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="pos">
+  
+  <div class="header">
+    <h2>GRIEGUS POS</h2>
+    <div id="fecha"></div>
+  </div>
+
+  <div class="info">
+    <div><strong>Cliente:</strong> <span id="cliente"></span></div>
+    <div><strong>Factura #:</strong> <span id="factura"></span></div>
+  </div>
+
+  <div class="line"></div>
+
+  <div class="items" id="items"></div>
+
+  <div class="line"></div>
+
+  <div class="total">
+    <span>TOTAL</span>
+    <span id="total"></span>
+  </div>
+
+  <div class="footer">
+    Gracias por su compra 🙌
+  </div>
+
+  <div class="btn" onclick="window.print()">🖨️ Imprimir</div>
+
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  // 🔹 Obtener parámetro o valor por defecto
+  function getParam(name, fallback) {
+    return params.get(name) || fallback;
+  }
+
+  // 🔹 Datos principales
+  const cliente = getParam("cliente", "Cliente Demo");
+  const fecha = getParam("fecha", new Date().toLocaleString());
+  const factura = getParam("factura", Math.floor(Math.random() * 10000));
+
+  // 🔹 Detalle (formato: Producto xCantidad:Total)
+  let detalleRaw = params.get("detalle");
+
+  // Si no hay detalle → demo
+  if (!detalleRaw) {
+    detalleRaw = "Corte x1:100,Barba x2:100,Shampoo x1:70";
+  }
+
+  // 🔹 Mostrar datos
+  document.getElementById("cliente").innerText = cliente;
+  document.getElementById("fecha").innerText = fecha;
+  document.getElementById("factura").innerText = factura;
+
+  const itemsDiv = document.getElementById("items");
+
+  let totalCalculado = 0;
+
+  // 🔹 Procesar detalle
+  detalleRaw.split(",").forEach(item => {
+    if (!item) return;
+
+    const partes = item.split(":");
+    if (partes.length < 2) return;
+
+    const nombreCantidad = partes[0];
+    const precio = parseFloat(partes[1]) || 0;
+
+    totalCalculado += precio;
+
+    const div = document.createElement("div");
+    div.classList.add("item");
+
+    div.innerHTML = `
+      <span>${nombreCantidad}</span>
+      <span>L ${precio.toFixed(2)}</span>
+    `;
+
+    itemsDiv.appendChild(div);
+  });
+
+  // 🔹 Total desde URL o calculado
+  const totalParam = params.get("total");
+  const totalFinal = totalParam ? parseFloat(totalParam) : totalCalculado;
+
+  document.getElementById("total").innerText = "L " + totalFinal.toFixed(2);
+
+</script>
+
+</body>
+</html>
