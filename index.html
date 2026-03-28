@@ -128,19 +128,19 @@
             </div>
             <div class="info_empresa">
                 <h2>GRIEGUS</h2>
-                <p>Barrio El Centro, Av. La Holla, Santa Bárbara</p>
+                <p>Dirección: Antes de subir la cuesta del calvario, una casa arriba de la vidrieria, hay una un rotulo que dice Griegus Barber Shop en el portón</p>
                 <p>Tel: +504 8817-7532</p>
             </div>
         </div>
         <div class="info_ticket">
-            <div id="f">12/12/12, 12:00 PM</div>
+            <div id="f"></div>
             <!-- Campo Id Ticket -->
-            <div class="id_ticket"><strong>Ticket ID:</strong> <span id="ticket">a123bc9</span></div> 
+            <div class="id_ticket"><strong>Ticket ID:</strong> <span id="ticket"></span></div> 
         </div>
         <div class="info_cliente">
             <!-- Campo Cliente variable c -->
             <div><strong>Cliente:</strong> <span id="c"></span></div>
-            <div><strong>Tel:</strong> <span id="tel"></span></div>
+            <div><strong>Vendedor:</strong> <span id="v"></span></div>
         </div>
         <!-- Detalle del ticket -->
         <div class="line"></div>
@@ -187,7 +187,7 @@
 //   Datos cliente
 
   const cliente = getParam("c", "Cliente Final");//variable c es cliente
-  const tel = getParam("tel", "98587507");//variable tel es telefono
+  const v = getParam("v", "Admin");//variable v es vendedor
 
 // detalle de ticket
   let detalleRaw = params.get("d");//variable d es detalle
@@ -226,7 +226,7 @@
   document.getElementById("f").innerText = fechaFormateada;
   document.getElementById("ticket").innerText = ticket;
   document.getElementById("c").innerText = cliente;
-  document.getElementById("tel").innerText = tel;
+  document.getElementById("v").innerText = tel;
   //Total desde URL o calculado
   const totalParam = params.get("t"); //variable t es total
   const totalFinal = totalParam ? parseFloat(totalParam) : totalCalculado;
