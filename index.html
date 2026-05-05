@@ -18,192 +18,199 @@
         }
 
         .POS {
-            width: 100%;
             width: 340px;
             background: #fff;
             overflow: hidden;
             padding: 5px;
+            border: 1px dashed #ccc;
         }
+
         .qr {
             width: 80px;
             margin: 15px auto;
         }
+
         .logo {
             margin: 15px auto;
             display: block;
             max-width: 60px;
         }
+
         .logo img {
             width: 100%;
-            height: auto;
-            margin: auto;
         }
+
         .header {
-            background: #fff;
-            color: #000;
             display: flex;
-            flex-direction: row;
-            gap: 0.2rem;
+            gap: 5px;
             align-items: center;
         }
 
-        .header h2 {
-            margin: 0;
-            font-size: 18px;
+        .info_empresa {
+            font-size: 12px;    
         }
 
-        .info_empresa {
-            gap: 0;
-            font-size: 12px;    
-         }
         .info_empresa h2 {
-            margin: 0;
             font-size: 1rem;
         }
+
         .info_empresa p {
-            margin: 0.1em;
+            margin: 2px 0;
         }
+
         .info_ticket {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: start;
         }
+
         .id_ticket {
             font-size: 12px;
             padding-bottom: 10px;
         }
+
         .info_cliente {
             padding: 10px 15px 0 15px;
             font-size: 13px;
             border-top: 1px dashed #999;
         }
+
         .line {
-        border-top: 1px dashed #999;
-        margin: 10px 0;
-        }
-        .descripcion{
-            display: flex;
-            padding: 0 15px;
-            font-size: 14px;
-            margin-bottom: 5px;
-            justify-content: space-between
-        }
-        .items {
-        padding: 0 15px;
+            border-top: 1px dashed #999;
+            margin: 10px 0;
         }
 
-        .item {
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-        margin-bottom: 5px;
+        /* TABLA */
+        .tabla {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .tabla th, .tabla td {
+            padding: 5px;
+        }
+
+        .tabla thead {
+            border-bottom: 1px dashed #999;
+        }
+
+        .tabla tbody tr {
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .tabla th:nth-child(2),
+        .tabla td:nth-child(2),
+        .tabla th:nth-child(3),
+        .tabla td:nth-child(3) {
+            text-align: right;
         }
 
         .total {
-        padding: 0 15px;
-        font-size: 18px;
-        font-weight: bold;
-        display: flex;
-        justify-content: space-between;
+            padding: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
         }
 
         .footer {
-        text-align: center;
-        font-size: 12px;
-        padding: 10px;
-        color: #555;
+            text-align: center;
+            font-size: 12px;
+            padding: 10px;
+            color: #555;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="POS">
-        <div class="qr">
-            <img id="qr-code" src="" alt="" width="100%">
-        </div>
-        <div class="header">
-            <!-- <div class="logo">
-                <img src="LOGOAPP.png" alt="logo">
-            </div> -->
-            <div class="info_empresa">
-                <h2>INVERSIONES D&R</h2>
-                <p>Dirección: Barrio el Centro, Santa Bárbara</p>
-                <p>Tel: +504 9882-5687</p>
-            </div>
-        </div>
-        <div class="info_ticket">
-            <div id="f"></div>
-            <!-- Campo Id Ticket -->
-            <div class="id_ticket"><strong>Ticket ID:</strong> <span id="ticket"></span></div> 
-        </div>
-        <div class="info_cliente">
-            <!-- Campo Cliente variable c -->
-            <div><strong>Cliente:</strong> <span id="c"></span></div>
-            <div><strong>Vendedor:</strong> <span id="v"></span></div>
-            <div><strong>Metodo de Pago:</strong> <span id="p"></span></div>
-        </div>
-        <!-- Detalle del ticket -->
-        <div class="line"></div>
-        <div class="descripcion">
-            <strong>Descripción</strong>
-            <strong>Subtotal</strong>
-        </div>
-        <div class="items" id="items"></div>
+<div class="POS">
 
-        <div class="line"></div>
-        
-        <div class="total">
-            <span>TOTAL</span>
-            <!-- Campo Total variable t -->
-            <span id="t"></span>
-        </div>
+    <div class="qr">
+        <img id="qr-code" src="" width="100%">
+    </div>
 
-        <div class="footer">
-            Gracias por preferirnos
+    <div class="header">
+        <div class="logo">
+            <img src="LOGOAPP.png">
+        </div>
+        <div class="info_empresa">
+            <h2>GRIEGUS</h2>
+            <p>Dirección: Don pollo #1 frente al mercado municipal ,barrio farolito <br>Don pollo #2 barrio farolito frente farmacia demoras parma</p>
+            <p>Tel: +504 9882-5687</p>
         </div>
     </div>
 
-    <script>
-  const params = new URLSearchParams(window.location.search);
+    <div class="info_ticket">
+        <div id="f"></div>
+        <div class="id_ticket"><strong>Ticket ID:</strong> <span id="ticket"></span></div>
+    </div>
 
-  //Obtener parámetro o valor por defecto
-  function getParam(name, fallback) {
+    <div class="info_cliente">
+        <div><strong>Cliente:</strong> <span id="c"></span></div>
+        <div><strong>Local:</strong> <span id="l"></span></div>
+        <div><strong>Método de Pago:</strong> <span id="p"></span></div>
+    </div>
+
+    <div class="line"></div>
+
+    <!-- 🔥 TABLA NUEVA -->
+    <table class="tabla">
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Cant.</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody id="items"></tbody>
+    </table>
+
+    <div class="line"></div>
+
+    <div class="total">
+        <span>TOTAL</span>
+        <span id="t"></span>
+    </div>
+
+    <div class="footer">
+        Gracias por preferir Griegus
+    </div>
+
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+function getParam(name, fallback) {
     return params.get(name) || fallback;
-  }
+}
 
-  //Datos ticket
-  const fechaRaw = getParam("f", null); //variable f es fecha
+// Fecha
+const fechaRaw = getParam("f", null);
+let fechaFormateada = fechaRaw ? new Date(fechaRaw).toLocaleString() : new Date().toLocaleString();
 
-    let fechaFormateada;
+// Datos
+const ticket = getParam("ticket", Math.floor(Math.random() * 10000));
+const cliente = getParam("c", "Cliente Final");
+const v = getParam("l", "Principal");
+const p = getParam("p", "Efectivo");
 
-    if (fechaRaw) {
-        const fechaObj = new Date(fechaRaw);
-        fechaFormateada = fechaObj.toLocaleString();
-    } else {
-        fechaFormateada = new Date().toLocaleString();
-    }
-  const ticket = getParam("ticket", Math.floor(Math.random() * 10000));
+// Detalle
+let detalleRaw = params.get("d") || "Corte x1:100,Barba x2:50,Shampoo x1:70";
 
+const itemsDiv = document.getElementById("items");
+let totalCalculado = 0;
 
-//   Datos cliente
-
-  const cliente = getParam("c", "Cliente Final");//variable c es cliente
-  const v = getParam("v", "Admin");//variable v es vendedor
-  const p = getParam("p", "Efectivo");
-
-// detalle de ticket
-  let detalleRaw = params.get("d");//variable d es detalle
-  // Si no hay detalle → demo
-  if (!detalleRaw) {
-    detalleRaw = "Corte x1:100,Barba x2:100,Shampoo x1:70";
-  }
-   
-  const itemsDiv = document.getElementById("items");
-
-  let totalCalculado = 0;
-
-  // 🔹 Procesar detalle
-  detalleRaw.split(",").forEach(item => {
+// Procesar productos
+detalleRaw.split(",").forEach(item => {
     if (!item) return;
 
     const partes = item.split(":");
@@ -212,33 +219,40 @@
     const nombreCantidad = partes[0];
     const precio = parseFloat(partes[1]) || 0;
 
-    totalCalculado += precio;
+    const [nombre, cantidadRaw] = nombreCantidad.split(" x");
+    const cantidad = parseInt(cantidadRaw) || 1;
 
-    const div = document.createElement("div");
-    div.classList.add("item");
+    const subtotal = precio * cantidad;
+    totalCalculado += subtotal;
 
-    div.innerHTML = `
-      <span>${nombreCantidad}</span>
-      <span>L ${precio.toFixed(2)}</span>
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+        <td>${nombre}</td>
+        <td>${cantidad}</td>
+        <td>L ${subtotal.toFixed(2)}</td>
     `;
 
-    itemsDiv.appendChild(div);
-  });
-  //Mostrar datos
-  document.getElementById("f").innerText = fechaFormateada;
-  document.getElementById("ticket").innerText = ticket;
-  document.getElementById("c").innerText = cliente;
-  document.getElementById("v").innerText = v;
-  document.getElementById("p").innerText = p;
-  //Total desde URL o calculado
-  const totalParam = params.get("t"); //variable t es total
-  const totalFinal = totalParam ? parseFloat(totalParam) : totalCalculado;
+    itemsDiv.appendChild(tr);
+});
 
-  document.getElementById("t").innerText = "L " + totalFinal.toFixed(2);
-//  codigo qr
+// Mostrar datos
+document.getElementById("f").innerText = fechaFormateada;
+document.getElementById("ticket").innerText = ticket;
+document.getElementById("c").innerText = cliente;
+document.getElementById("l").innerText = l;
+document.getElementById("p").innerText = p;
 
+// Total
+const totalParam = params.get("t");
+const totalFinal = totalParam ? parseFloat(totalParam) : totalCalculado;
+
+document.getElementById("t").innerText = "L " + totalFinal.toFixed(2);
+
+// QR
 document.getElementById("qr-code").src =
     "https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=" + encodeURIComponent(ticket);
 </script>
+
 </body>
 </html>
